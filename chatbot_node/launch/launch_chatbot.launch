@@ -10,4 +10,6 @@
   <!--node name="arithmetic_node" pkg="arithmetic_node" type="arithmetic_node">
   </node-->
 
+  <param name = "name" type = "str" value="Yoda" />
+
 </launch>

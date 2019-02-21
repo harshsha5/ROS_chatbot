@@ -8,7 +8,7 @@ using namespace std;
 
 chatbot_node::reply_msg msg;
 ros::Publisher chatter_pub;
-
+string naam;
 
 //Add your code here
 
@@ -16,7 +16,11 @@ void chatterCallback(const message_ui::sent_msg::ConstPtr& msg_from_ui)
 {
   msg.header = msg_from_ui->header;
   if (msg_from_ui->message.compare("Hello") == 0)
-    msg.message = "Hello Raju";
+  {
+    ros::param::get("/name",naam);
+
+    msg.message = "Hello " + naam;
+  }
   else if((msg_from_ui->message.compare("What is your name?") == 0))
     msg.message = "My name is MRSD Siri";
   else if((msg_from_ui->message.compare("How are you?") == 0))
