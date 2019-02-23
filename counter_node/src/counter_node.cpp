@@ -43,6 +43,12 @@ bool counter(counter_node::counterRequest  &req,counter_node::counterResponse &r
 
     case 2: res.reply = num_sent_msg;
             break;
+
+    case 3: res.reply = ros::Time::now().toSec() - last_reply_msg_time.toSec();
+            break;
+
+    case 4: res.reply = ros::Time::now().toSec() - last_sent_msg_time.toSec();
+            break;
     
     default: std::cout<<"give valid request_id";
             break;
