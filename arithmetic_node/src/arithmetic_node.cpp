@@ -11,8 +11,6 @@ using boost::lexical_cast;
 arithmetic_node::arithmetic_reply msg;
 ros::Publisher arithmetic_pub;
 
-//Add your code here
-
 void arithmetic_Callback(const message_ui::sent_msg::ConstPtr& msg_from_ui)
 { 
   string received_message = msg_from_ui->message;
