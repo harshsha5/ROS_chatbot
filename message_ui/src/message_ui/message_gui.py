@@ -42,7 +42,7 @@ from message_ui.msg import sent_msg
 from chatbot_node.msg import reply_msg
 #from arithmetic_node.msg import arithmetic_reply 
 from std_msgs.msg import Int16
-#from counter_node.srv import *
+from counter_node.srv import *
 
 
 class MessageGUI(Plugin):
@@ -99,7 +99,7 @@ class MessageGUI(Plugin):
         self._widget.counter_val_to_get.setInputMask('9')   
 
         self._widget.send_message.pressed.connect(self._on_send_message_pressed)
-        #self._widget.send_request.pressed.connect(self._on_send_request_pressed)
+        self._widget.send_request.pressed.connect(self._on_send_request_pressed)
         
     def _on_msg_to_send_changed(self, msg):
         msg = str(msg)
@@ -115,15 +115,15 @@ class MessageGUI(Plugin):
         except ValueError:
             print('String input is not an integer')
 
-    # def _on_send_request_pressed(self):
-    #     rospy.wait_for_service('message_counter')
-    #     try:
-    #         counter_serv = rospy.ServiceProxy('message_counter',counter)
-    #         response = counter_serv(self.counter_req_id)
-    #         self.message_count_display(response)
-    #         return response
-    #     except rospy.ServiceException, ex:
-    #         print "Service call to get message counter failed. %s"%e
+    def _on_send_request_pressed(self):
+        rospy.wait_for_service('message_counter')
+        try:
+            counter_serv = rospy.ServiceProxy('message_counter',counter)
+            response = counter_serv(self.counter_req_id)
+            self.message_count_display(response)
+            return response
+        except rospy.ServiceException, ex:
+            print "Service call to get message counter failed. %s"%e
 
 
     def shutdown_plugin(self):
